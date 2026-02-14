@@ -1,0 +1,60 @@
+# ========================
+# Environment & Secrets
+# ========================
+.env
+.env.*
+!/.env.example
+env/
+*.key
+*.pem
+*.crt
+*.pfx
+*.p12
+
+# ========================
+# Docker
+# ========================
+docker-compose.override.yml
+*.log
+docker-data/
+data/
+volumes/
+
+# ========================
+# Node (if using n8n local)
+# ========================
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# ========================
+# Python (if automation scripts exist)
+# ========================
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# ========================
+# System Files
+# ========================
+.DS_Store
+Thumbs.db
+AppData/
+.local/
+.windsurf/
+*.dat
+*.LOG1
+*.LOG2
+*.blf
+*.regtrans-ms
+NTUSER.DAT*
+ntuser.dat*
+ntuser.ini
+
+# ========================
+# IDE
+# ========================
+.vscode/
+.idea/
+*.swp
