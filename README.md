@@ -8,7 +8,7 @@ The objective is to build production-oriented AI infrastructure without relying 
 
 ## 🏗 Architecture Overview
 
-![Architecture Diagram](./diagrams/openclaw-architecture.png)
+![Architecture Diagram](./openclaw-architecture.png)
 
 ### High-Level Flow
 
