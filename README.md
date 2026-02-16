@@ -1,8 +1,18 @@
-# AI Automation Infrastructure (Self-Hosted)
+# AI Automation Infrastructure (Self-Hosted on OCI)
 
-This project documents the design and deployment of a self-hosted AI automation system running on a secured VPS environment.
+This project documents the design, deployment, and security hardening of a self-hosted AI automation platform running on Oracle Cloud Infrastructure (OCI).
 
-The goal is to build production-ready AI infrastructure without relying fully on managed cloud services.
+The objective is to build production-oriented AI infrastructure without relying entirely on managed cloud services.
+
+---
+
+## 🏗 Architecture Overview
+
+![Architecture Diagram](./diagrams/openclaw-architecture.png)
+
+### High-Level Flow
+
+User → HTTPS → Reverse Proxy → Docker Network → OpenClaw ↔ n8n
 
 ---
 
@@ -10,30 +20,49 @@ The goal is to build production-ready AI infrastructure without relying fully on
 
 - OpenClaw (AI execution layer)
 - n8n (Workflow automation engine)
-- Docker-based container deployment
-- Reverse proxy routing
+- Docker containerization
+- Reverse proxy (TLS termination & route separation)
 - Secure API exposure
 - VPS hardening & firewall configuration
 
 ---
 
-## 🏗 Infrastructure Overview
+## 🌐 Cloud Deployment (Oracle Cloud Infrastructure)
 
-- Linux-based VPS
-- SSH hardening & brute-force protection
-- Subnet & firewall rule configuration
-- Environment isolation using .env files
-- Containerized services with restart policies
+- Hosted on OCI Compute Instance
+- Configured VCN and subnet rules
+- Public IP restricted to ports 80/443 only
+- Internal services isolated via Docker network
+- Controlled ingress/egress rules
 
 ---
 
-## 🔐 Security Considerations
+## 🔐 Security Architecture
 
-- Restricted port exposure
-- Fail login protection
-- Secure API routing
-- Environment variable management
-- Separation of public and internal services
+### Public Exposure Policy
+
+Only ports:
+- 80 (HTTP)
+- 443 (HTTPS)
+
+All internal service ports (3000, 5678, 8080) are restricted to private Docker networking.
+
+### Security Controls
+
+- SSH hardened and brute-force protected
+- No direct container exposure to internet
+- Reverse proxy handles TLS termination
+- Environment variables isolated via `.env`
+- Separation of public and internal service layers
+
+---
+
+## ⚙ Engineering Challenges Solved
+
+- Debugged HTML vs JSON API misrouting caused by reverse proxy path conflicts
+- Resolved incorrect REST endpoint exposure
+- Managed environment variable injection across services
+- Implemented network isolation between containers
 
 ---
 
@@ -42,7 +71,8 @@ The goal is to build production-ready AI infrastructure without relying fully on
 This project demonstrates:
 
 - AI infrastructure deployment
-- Docker networking
-- Reverse proxy debugging
-- API response troubleshooting (HTML vs JSON misrouting)
-- MCP integration for workflow automation
+- Docker networking & isolation
+- Reverse proxy configuration
+- Cloud network segmentation
+- Production-style security design
+- AI workflow orchestration (MCP integration)
